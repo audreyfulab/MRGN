@@ -50,7 +50,7 @@ You can install MRGNtrio from GitHub release with
 
 ``` r
 install.packages("devtools")
-devtools::install_github("Jarred6068/MRGN")
+devtools::install_github("audreyfulab/MRGN")
 ```
 
 ## Example
