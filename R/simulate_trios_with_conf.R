@@ -457,7 +457,7 @@ get.custom.graph = function(Adj, b.snp, b.med, struct, conf.num.vec, number.of.T
 
 #creates the graph skeleton for each model: contains u, k, w, and z variables in adj.
 gen.graph.skel = function(model, b.snp, b.med, conf.num.vec, number.of.T, number.of.V, struct, degree, method = "er",
-                          plot.graph = TRUE, arrow.size = 0.2, layout.graph = 'nicely', neg.freq,
+                          plot.graph = TRUE, arrow.size = 0.2, layout.graph = 'nicely', neg.freq = 0.5,
                           conf.coef.ranges=list(K=c(0.01, 0.1), U=c(0.15,0.5), W=c(0.15,0.5), Z=c(1, 1.5))){
 
   #preallocate names
