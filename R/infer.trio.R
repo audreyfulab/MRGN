@@ -18,6 +18,9 @@
 #'               threshold gamma is ignored. default = FALSE
 #' @param alpha The rejection threshold for all wald tests (default = 0.01) which is approximately the bonferroni correction
 #' @param nperms The number of permutations to perform for trios with rare variants (default = 10,000)
+#' @param compute.nominal (logical) if TRUE, nominal p-values are computed from the permutation null distribution
+#'                        using a normal approximation. If FALSE (default), permutation p-values are computed as
+#'                        (B+1)/(m+1) where B is the number of permuted statistics >= the observed (Phipson & Smyth, 2010).
 #' @param verbose (logical) if TRUE results of the regressions are printed
 #' @examples
 #' #inference on a single eQTL trio
@@ -60,7 +63,7 @@
 ####################################################################
 #a wrapper function for get.freq(), Reg(), and PermReg() to infer the trio
 #combines the functions from sections 1.1-1.2
-infer.trio=function(trio=NULL, use.perm = TRUE, gamma=0.05, is.CNA = FALSE, alpha=0.01, nperms=100, verbose=FALSE){
+infer.trio=function(trio=NULL, use.perm = TRUE, gamma=0.05, is.CNA = FALSE, alpha=0.01, nperms=1000, compute.nominal=FALSE, verbose=FALSE){
 
   #ensure trio is a dataframe for later functions:
   trio = as.data.frame(trio)
@@ -82,12 +85,15 @@ infer.trio=function(trio=NULL, use.perm = TRUE, gamma=0.05, is.CNA = FALSE, alph
   #step 2.1
   if(use.perm == TRUE & (minor<gamma | is.CNA)){
     #preform permuted regression (section 1.2) for rare variants
+    #note: when compute.nominal=FALSE, permutation p-values use the (B+1)/(m+1) correction
+    #(Phipson & Smyth, 2010) to include the observed statistic in the reference distribution
     pvals=PermReg(trio = na.omit(trio),
                   t.obs12 = pt.out$tvals[2],
                   t.obs22 = pt.out$tvals[4],
                   p11 = pt.out$pvals[1],
                   p21 = pt.out$pvals[3],
-                  m = nperms)
+                  m = nperms,
+                  compute.nominal = compute.nominal)
 
   }else{
     #else return the pvals from standard reg.

@@ -8,13 +8,14 @@
 #' @param p11 the p-value from the test on beta_11: V ~ T1 | T2, U
 #' @param p21 the p-value from the test on beta_21: V ~ T2 | T1, U
 #' @param m the number of permutations to perform
+#' @param compute.nominal logical, whether to compute nominal p-values
 #' PermReg()
 
 
 ####################################################################
 #this function uses PermReg.helper.fn() to preform the permuted regression
 #analysis for rare variants - section 1.2
-PermReg=function(trio=NULL, t.obs12=NULL, t.obs22=NULL, p11=NULL, p21=NULL, m=NULL){
+PermReg=function(trio=NULL, t.obs12=NULL, t.obs22=NULL, p11=NULL, p21=NULL, m=NULL, compute.nominal=FALSE){
 
   #preallocate a matrix of indicies ranging from 1:sample size
   #we will shuffle these numbers later to get the permutations within genotype
@@ -60,12 +61,19 @@ PermReg=function(trio=NULL, t.obs12=NULL, t.obs22=NULL, p11=NULL, p21=NULL, m=NU
                 response="T2")
 
   #Step 2.1 - calculating the nominal p-values using Theta21 and Theta22
+  if (isTrue(compute.nominal)){
+    nominal.p12=2 * (stats::pnorm(abs((t.obs12 - mean(Theta12))/stats::sd(Theta12)), lower.tail = F))
+    nominal.p22=2 * (stats::pnorm(abs((t.obs22 - mean(Theta22))/stats::sd(Theta22)), lower.tail = F))
+    #concat pvalues
+    pvals=c(p11, nominal.p12, p21, nominal.p22)
+  }else{
+    perm.p12 = (sum(abs(Theta12) >= abs(t.obs12)) + 1) / (m + 1)
+    perm.p22 = (sum(abs(Theta22) >= abs(t.obs22)) + 1) / (m + 1)
+    #concat pvalues
+    pvals=c(p11, perm.p12, p21, perm.p22)
 
-  nominal.p12=2 * (stats::pnorm(abs((t.obs12 - mean(Theta12))/stats::sd(Theta12)), lower.tail = F))
-  nominal.p22=2 * (stats::pnorm(abs((t.obs22 - mean(Theta22))/stats::sd(Theta22)), lower.tail = F))
-
-  #concat pvalues
-  pvals=c(p11, nominal.p12, p21, nominal.p22)
+  }
+  
   #return pvalue vector
   return(pvals)
 }
