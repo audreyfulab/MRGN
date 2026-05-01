@@ -61,7 +61,7 @@ PermReg=function(trio=NULL, t.obs12=NULL, t.obs22=NULL, p11=NULL, p21=NULL, m=NU
                 response="T2")
 
   #Step 2.1 - calculating the nominal p-values using Theta21 and Theta22
-  if (isTrue(compute.nominal)){
+  if (isTRUE(compute.nominal)){
     nominal.p12=2 * (stats::pnorm(abs((t.obs12 - mean(Theta12))/stats::sd(Theta12)), lower.tail = F))
     nominal.p22=2 * (stats::pnorm(abs((t.obs22 - mean(Theta22))/stats::sd(Theta22)), lower.tail = F))
     #concat pvalues
