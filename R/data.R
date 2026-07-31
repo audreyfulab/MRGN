@@ -1,5 +1,5 @@
 #' @title 200 trios formed from the GTEx tissue WholeBlood
-#' @references The GTEx Consortium. GTEx Analysis V8 (dbGaP Accession phs000424.v8.p2). https:// gtexportal.org/home/datasets, 2021. [Online; accessed 8-June-2020]
+#' @references The GTEx Consortium. GTEx Analysis V8 (dbGaP Accession phs000424.v8.p2). https:// gtexportal.org/home/datasets, 2021. (Online; accessed 8-June-2020)
 #' @description A list of dataframes where each dataframe represents a single trio from one of the 5 model topologies
 #' @docType data
 #' @format a list of length = 200 where each element is an 670 X 3 dataframe where the first

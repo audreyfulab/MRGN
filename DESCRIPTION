@@ -1,17 +1,21 @@
 Package: MRGN
 Title: Medenlian Randomization Genomic Network
-Version: 1.3.7.4
+Version: 1.3.8
 Authors@R: 
     c(person("Jarred", "Kvamme", , "jarredk@uidaho.edu", role = c("aut", "cre"),
     comment = c(ORCID = "0000-0001-7333-2370")),
-    person("Audrey", "Fu", , "audreyf@uidaho.edu", role = c("aut")))
-Description: This package uses the principle of mendelian randomization to infer a genetic network by implementing the MRGN general and trio-specific algorithms.
+    person("Audrey", "Fu", , "audreyqyfu@gmail.com", role = c("aut")))
+Description: This package implements the MRGN (Mendelian Randomization for
+    Genomic Networks) method. This method leverages the principle of Mendelian randomization
+    to infer causal relationship for a genomic trio, which consists of
+    a genetic variant (as the instrumental variable) and two molecular phenotypes
+    (for example, expression of two genes), with or without the presence of
+    confounders.
 License: GPL (>= 3)
 Encoding: UTF-8
 Depends: 
     R (>= 4.0.0)
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
 LazyData: true
 RdMacros: Rdpack
 Imports: 
@@ -28,3 +32,4 @@ Imports:
     propagate,
     methods,
     Rdpack
+Config/roxygen2/version: 7.3.3.9000
