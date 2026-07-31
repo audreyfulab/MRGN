@@ -180,8 +180,14 @@ print(results)
 #return just the inferred model topology
 models = sapply(WBtrios[1:10], function(x) infer.trio(x)$Inferred.Model)
 print(models)
-#fast example on 10 trios with copy number alterations (CNAs) 
-#as genetic variants from the built in dataset CNAtrios using permutation
+
+#inference on a single trio with a copy number alteration (CNA)
+#as genetic variant
+dim (CNAtrios[[1]])
+# 564x37
+result=infer.trio(CNAtrios[1], is.CNA = TRUE, use.perm = TRUE)
+print(result)
+#fast example on 10 CNA trios  
 models = sapply(CNAtrios[1:10], function(x) infer.trio(x, is.CNA = TRUE, use.perm = TRUE, nperms = 1000)$Inferred.Model)
 print(models)
 
