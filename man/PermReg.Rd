@@ -10,7 +10,8 @@ PermReg(
   t.obs22 = NULL,
   p11 = NULL,
   p21 = NULL,
-  m = NULL
+  m = NULL,
+  compute.nominal = FALSE
 )
 }
 \arguments{
@@ -24,7 +25,9 @@ PermReg(
 
 \item{p21}{the p-value from the test on beta_21: V ~ T2 | T1, U}
 
-\item{m}{the number of permutations to perform
+\item{m}{the number of permutations to perform}
+
+\item{compute.nominal}{logical, whether to compute nominal p-values
 PermReg()}
 }
 \description{

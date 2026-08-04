@@ -20,8 +20,8 @@
 #'               threshold gamma is ignored. default = FALSE
 #' @param alpha The rejection threshold for all Wald tests (default = 0.01)
 #' @param nperms The number of permutations within each genotype (default = 1,000)
-#' @param compute.nominal (logical) if TRUE, standard p-values are computed. If FALSE (default), permutation p-values are computed as
-#'                        (B+1)/(nperms+1) where B is the number of permuted statistics >= the observed (Phipson & Smyth, 2010).
+#' @param compute.nominal (logical) Set to FALSE, so that ermutation p-values are computed as
+#'                        (B+1)/(nperms+1) where B is the number of permuted statistics >= the observed. A peudocount of 1 is added to the calculation.
 #' @param verbose (logical) if TRUE results of the regressions are printed
 #' @examples
 #' #inference on a single trio with an eQTL as genetic variant
@@ -76,7 +76,7 @@
 ####################################################################
 #a wrapper function for get.freq(), Reg(), and PermReg() to infer the trio
 #combines the functions from sections 1.1-1.2
-infer.trio=function(trio=NULL, use.perm = FALSE, gamma=0.05, is.CNA = FALSE, alpha=0.01, nperms=1000, compute.nominal=TRUE, verbose=FALSE){
+infer.trio=function(trio=NULL, use.perm = FALSE, gamma=0.05, is.CNA = FALSE, alpha=0.01, nperms=1000, compute.nominal=FALSE, verbose=FALSE){
 
   #ensure trio is a dataframe for later functions:
   trio = as.data.frame(trio)
