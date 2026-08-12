@@ -32,7 +32,7 @@ threshold gamma is ignored. default = FALSE}
 
 \item{nperms}{The number of permutations within each genotype (default = 1,000)}
 
-\item{compute.nominal}{(logical) Set to FALSE, so that ermutation p-values are computed as
+\item{compute.nominal}{(logical) Set to FALSE, so that permutation p-values are computed as
 (B+1)/(nperms+1) where B is the number of permuted statistics >= the observed. A peudocount of 1 is added to the calculation.}
 
 \item{verbose}{(logical) if TRUE results of the regressions are printed}
@@ -89,7 +89,9 @@ dim (CNAtrios[[1]])
 result=infer.trio(CNAtrios[1], is.CNA = TRUE, use.perm = TRUE)
 print(result)
 #fast example on 10 CNA trios from the built in dataset CNAtrios using permutation
-models = sapply(CNAtrios[1:10], function(x) infer.trio(x, is.CNA = TRUE, use.perm = TRUE, nperms = 1000)$Inferred.Model)
+models = sapply(CNAtrios[1:10],
+                function(x) infer.trio(x, is.CNA = TRUE, use.perm = TRUE,
+                                       nperms = 1000)$Inferred.Model)
 print(models)
 }
 }

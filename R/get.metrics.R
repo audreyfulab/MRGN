@@ -10,6 +10,8 @@
 #'
 #' @param Truth the true model class or adjacency matrix
 #' @param Inferred the inferred model class or adjacency matrix
+#' @param reg.vec the vector of regression indicators passed to get.adj.from.class() when the inferred input
+#' is a class label (i.e. when get.adj.inf = TRUE)
 #' @param nV the number of genetic variants in the graph (default = 1 for trios, passed to MRPC::RecallPrecision)
 #' @param includeV (logical) whether to include the edges with the genetic variant V (default = TRUE, passed to MRPC::RecallPrecision)
 #' @param weight.edge.directed.present a numeric specifying the weight applied to true positive edges with correct directions
@@ -86,10 +88,29 @@ get.metrics=function(Truth, Inferred, reg.vec, nV = 1, includeV = TRUE, weight.e
 
 
 
+#' A function to compute the edge-based recall and precision between two graphs
 #'
 #' This function is copied from MRPC::RecallPrecision
 #'
-#'
+#' @param g1 the true graph, as a graphNEL object, a pcAlgo object, or an adjacency matrix
+#' @param g2 the inferred graph, in the same form as g1
+#' @param GV the number of genetic variants in the graph
+#' @param includeGV (logical) whether to include the edges involving the genetic variants
+#' @param edge.presence the weight applied to true positive edges with correct directions. default = 1
+#' @param edge.direction the weight applied to true positive edges with incorrect directions. default = 0.5
+#' @return a list
+#'        \describe{
+#'        \item{Matrix}{A 1 x 2 matrix of the weighted true and false positive counts.}
+#'        \item{TP}{The weighted number of true positive edges.}
+#'        \item{FP}{The weighted number of false positive edges.}
+#'        \item{NTE}{The number of edges in the true graph.}
+#'        \item{NIE}{The number of edges in the inferred graph.}
+#'        \item{Recall}{The edge-based recall.}
+#'        \item{Precision}{The edge-based precision.}
+#'        }
+#' @keywords internal
+#' @references
+#' \insertRef{badsha2021mrpc}{MRGN}
 
 
 RecallPrecision <- function (g1, g2, GV, includeGV, edge.presence = 1.0, edge.direction = 0.5)

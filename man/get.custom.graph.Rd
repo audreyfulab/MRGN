@@ -19,6 +19,8 @@ get.custom.graph(
 )
 }
 \arguments{
+\item{Adj}{The empty adjacency matrix of the graph passed from gen.graph.skel()}
+
 \item{b.snp}{either a single number or vector representing the effect(s) of the variant(s)}
 
 \item{b.med}{either a single number or vector representing the effect(s) between the molecular phenotypes}
@@ -38,8 +40,6 @@ get.custom.graph(
 \item{degree}{the expected number of neighbors (sum of in and out degree of the graph) passed to pcalg::randDAG}
 
 \item{method}{the method used to generate a random DAG for the V and T nodes when struct = "random". passed to pcalg::randDAG}
-
-\item{A}{The empty adjacency matrix of the graph passed from gen.graph.skel()}
 }
 \value{
 The adjacency matrix with all confounding variable node edges added

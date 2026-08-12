@@ -21,6 +21,9 @@ get.metrics(
 
 \item{Inferred}{the inferred model class or adjacency matrix}
 
+\item{reg.vec}{the vector of regression indicators passed to get.adj.from.class() when the inferred input
+is a class label (i.e. when get.adj.inf = TRUE)}
+
 \item{nV}{the number of genetic variants in the graph (default = 1 for trios, passed to MRPC::RecallPrecision)}
 
 \item{includeV}{(logical) whether to include the edges with the genetic variant V (default = TRUE, passed to MRPC::RecallPrecision)}

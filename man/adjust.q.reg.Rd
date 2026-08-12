@@ -15,6 +15,8 @@ a set of indicies for pvalues to omit}
 \item{lambda}{The value of the tuning parameter to estimate \eqn{pi_0}. Must be in \eqn{[0,1)}}
 
 \item{pi0.meth}{A string specifying one of 'smoother' or 'bootstrap'. Passed to qvalue::qvalue()}
+
+\item{num.of.trios}{the number of trios; sets the length of the returned qvalue and significance vectors}
 }
 \value{
 an \eqn{n X 2} dataframe containing the qvalues, and significance (logical)

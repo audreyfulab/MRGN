@@ -2,10 +2,39 @@
 % Please edit documentation in R/get.metrics.R
 \name{RecallPrecision}
 \alias{RecallPrecision}
-\title{This function is copied from MRPC::RecallPrecision}
+\title{A function to compute the edge-based recall and precision between two graphs}
 \usage{
 RecallPrecision(g1, g2, GV, includeGV, edge.presence = 1, edge.direction = 0.5)
+}
+\arguments{
+\item{g1}{the true graph, as a graphNEL object, a pcAlgo object, or an adjacency matrix}
+
+\item{g2}{the inferred graph, in the same form as g1}
+
+\item{GV}{the number of genetic variants in the graph}
+
+\item{includeGV}{(logical) whether to include the edges involving the genetic variants}
+
+\item{edge.presence}{the weight applied to true positive edges with correct directions. default = 1}
+
+\item{edge.direction}{the weight applied to true positive edges with incorrect directions. default = 0.5}
+}
+\value{
+a list
+\describe{
+\item{Matrix}{A 1 x 2 matrix of the weighted true and false positive counts.}
+\item{TP}{The weighted number of true positive edges.}
+\item{FP}{The weighted number of false positive edges.}
+\item{NTE}{The number of edges in the true graph.}
+\item{NIE}{The number of edges in the inferred graph.}
+\item{Recall}{The edge-based recall.}
+\item{Precision}{The edge-based precision.}
+}
 }
 \description{
 This function is copied from MRPC::RecallPrecision
 }
+\references{
+\insertRef{badsha2021mrpc}{MRGN}
+}
+\keyword{internal}

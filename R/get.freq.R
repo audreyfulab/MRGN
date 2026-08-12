@@ -4,6 +4,8 @@
 #' where 0 = homozygous for the reference allele, 1 = heterozygous for the reference allele,
 #' and 2 = homozygous for the alternative allele. It returns the min(alternative, reference)
 #' @param V a vector of alternative allele counts at a given eQTL
+#' @param is.CNA (logical) TRUE when V is a Copy Number Alteration rather than a bi-allelic variant, in which
+#' case the frequency of the rarest observed category is returned. default = FALSE
 #' @return min(alternative,reference)
 #' @examples
 #' get.freq(M1trio$V1)

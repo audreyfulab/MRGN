@@ -20,6 +20,8 @@ The adjacency matrix to}
 
 \item{return.igraph}{(logical) if TRUE the igraph object is returned. default == TRUE}
 
+\item{graph.layout}{a string specifying one of 'nicely' or 'as tree'. Determines the plotting structure of the graph}
+
 \item{node.size}{an integer giving the desired plotting size for graph vertices. Passed to igraph::plot_igraph}
 
 \item{arrow.size}{an integer giving the desired size for direct edges. Passed to igraph::plot_igraph}

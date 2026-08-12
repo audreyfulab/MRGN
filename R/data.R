@@ -34,3 +34,78 @@
 #'  column is the CNA representing V1 and columns 2:3 are the expression and Methylation targets representing
 #'  T1 and T2 (respectively) and the remaining columns are selected confounding covariates
 "CNAtrios"
+
+#' @title The eQTL columns of the 100 GTEx Whole Blood trios in WBtrios
+#' @references The GTEx Consortium. GTEx Analysis V8 (dbGaP Accession phs000424.v8.p2). https:// gtexportal.org/home/datasets, 2021. (Online; accessed 8-June-2020)
+#' @description The V1 (eQTL) column extracted from each of the first 100 trios in WBtrios and bound
+#'  column-wise into a single matrix
+#' @docType data
+#' @format a 670 X 100 matrix where the rows are observations and each column is the eQTL of one trio
+#' @seealso [WBtrios], [WBgenes]
+"WBsnps"
+
+#' @title The molecular phenotype columns of the 100 GTEx Whole Blood trios in WBtrios
+#' @references The GTEx Consortium. GTEx Analysis V8 (dbGaP Accession phs000424.v8.p2). https:// gtexportal.org/home/datasets, 2021. (Online; accessed 8-June-2020)
+#' @description The T1 and T2 (cis and trans target) columns extracted from each of the first 100 trios
+#'  in WBtrios and bound column-wise into a single matrix
+#' @docType data
+#' @format a 670 X 200 matrix where the rows are observations and the columns are the two molecular
+#'  phenotypes of each trio, in trio order
+#' @seealso [WBtrios], [WBsnps]
+"WBgenes"
+
+#' @title 100 simulated graphs with confounding, intermediate, and common child variables
+#' @description The full output of simData.from.graph() for each of 100 simulated datasets. Each dataset
+#'  was simulated under one of the 5 model topologies with 1 to 5 confounders (U), one intermediate
+#'  variable (W), and one common child (Z). The simulation parameters are recorded in synParams.
+#' @docType data
+#' @format a list of length = 100 where each element is a 4-list
+#'        \describe{
+#'        \item{data}{a 500 X (3 + n) dataframe where the first three columns are V1, T1, and T2 and the
+#'        remaining n columns are the simulated confounding variables. Column names are suffixed with the
+#'        index of the dataset.}
+#'        \item{Adjacency}{the adjacency matrix of the simulating graph.}
+#'        \item{Effects}{a matrix of the same dimension as Adjacency giving the simulated effect size of
+#'        each edge.}
+#'        \item{igraph}{the igraph representation of the simulating graph.}
+#'        }
+#' @seealso [synTrios], [synConfs], [synParams], [simData.from.graph]
+"synData"
+
+#' @title The 100 simulated trios from synData
+#' @description The first three columns (V1, T1, T2) of each simulated dataset in synData
+#' @docType data
+#' @format a list of length = 100 where each element is a 500 X 3 dataframe containing the simulated
+#'  variant V1 and the two molecular phenotypes T1 and T2
+#' @seealso [synData], [synConfs], [synParams]
+"synTrios"
+
+#' @title The pooled confounding variables from the 100 simulated datasets in synData
+#' @description The confounding, intermediate, and common child variables of every simulated dataset in
+#'  synData, bound column-wise into a single dataframe. Column names carry the variable type (U, W, or Z)
+#'  and the index of the dataset they were simulated with, so this pool can be used as the candidate set
+#'  of covariates when selecting confounders for any one trio in synTrios.
+#' @docType data
+#' @format a 500 X 512 dataframe where the rows are observations and the columns are the pooled
+#'  confounding variables
+#' @seealso [synData], [synTrios], [get.conf.matrix]
+"synConfs"
+
+#' @title The simulation parameters used to generate synData
+#' @description The randomly drawn parameters used to simulate each of the 100 datasets in synData
+#' @docType data
+#' @format a 100 X 14 dataframe where each row corresponds to one simulated dataset
+#'        \describe{
+#'        \item{V1, V2, V3, V4, V5, V6}{unused placeholder columns retained from the pre-allocated
+#'        parameter matrix; all values are zero.}
+#'        \item{model}{the model topology the dataset was simulated under, one of 'model0' through 'model4'.}
+#'        \item{minor.freq}{the minor allele frequency of the simulated variant.}
+#'        \item{b.snp}{the effect of the variant on the molecular phenotypes.}
+#'        \item{b.med}{the mediation effect between the molecular phenotypes.}
+#'        \item{SD}{the standard deviation of the residual noise.}
+#'        \item{num.confounder}{the number of confounding (U) variables.}
+#'        \item{num.intermediate}{the number of intermediate (W) variables.}
+#'        \item{num.common.child}{the number of common child (Z) variables.}
+#'        }
+#' @seealso [synData], [synTrios], [synConfs]
+"synParams"

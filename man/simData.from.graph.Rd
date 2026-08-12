@@ -114,8 +114,8 @@ X=simData.from.graph(theta=0.2,
                      conf.coef.ranges=list(K=c(0.01, 0.1), U=c(0.15,0.5),
                                            W=c(0.15,0.5), Z=c(1, 1.5)))
 }
-# simulate from a model 1 graph with one 2 "known" and 8 "unknown" confounders using a set of passed confounders and
-# plot the graph.
+# simulate from a model 1 graph with 2 "known" and 8 "unknown" confounders
+# using a set of passed confounders and plot the graph.
 \dontrun{
 ## using a set of passed confounders (K and U)
 conf.mat = WBscores[,1:10]

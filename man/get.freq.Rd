@@ -8,6 +8,9 @@ get.freq(V = NULL, is.CNA = FALSE)
 }
 \arguments{
 \item{V}{a vector of alternative allele counts at a given eQTL}
+
+\item{is.CNA}{(logical) TRUE when V is a Copy Number Alteration rather than a bi-allelic variant, in which
+case the frequency of the rarest observed category is returned. default = FALSE}
 }
 \value{
 min(alternative,reference)

@@ -7,7 +7,7 @@
 #' causal network inference. It wraps the functions get.freq(), Reg(), PermReg(), and class.vec() to infer an input trio.
 #' It returns a one dimensional dataframe containing the results of the coefficient and marginal tests and the
 #' inferred model structure.
-#' If the genetic variant is copy number alteration (CNA), permutation tests may 
+#' If the genetic variant is copy number alteration (CNA), permutation tests may
 #' be appropriate. To perform such tests, permutation tests, set is.CNA=TRUE and use.perm=TRUE and specify nperms.
 #'
 #' @param trio A dataframe with at least 3 columns. The first column should be the genetic variant, and the second
@@ -20,7 +20,7 @@
 #'               threshold gamma is ignored. default = FALSE
 #' @param alpha The rejection threshold for all Wald tests (default = 0.01)
 #' @param nperms The number of permutations within each genotype (default = 1,000)
-#' @param compute.nominal (logical) Set to FALSE, so that ermutation p-values are computed as
+#' @param compute.nominal (logical) Set to FALSE, so that permutation p-values are computed as
 #'                        (B+1)/(nperms+1) where B is the number of permuted statistics >= the observed. A peudocount of 1 is added to the calculation.
 #' @param verbose (logical) if TRUE results of the regressions are printed
 #' @examples
@@ -35,7 +35,7 @@
 #' #return just the inferred model topology
 #' models = sapply(WBtrios[1:10], function(x) infer.trio(x)$Inferred.Model)
 #' print(models)
-#' 
+#'
 #' #inference on a single trio with a copy number alteration (CNA)
 #' #as genetic variant
 #' dim (CNAtrios[[1]])
@@ -43,7 +43,9 @@
 #' result=infer.trio(CNAtrios[1], is.CNA = TRUE, use.perm = TRUE)
 #' print(result)
 #' #fast example on 10 CNA trios from the built in dataset CNAtrios using permutation
-#' models = sapply(CNAtrios[1:10], function(x) infer.trio(x, is.CNA = TRUE, use.perm = TRUE, nperms = 1000)$Inferred.Model)
+#' models = sapply(CNAtrios[1:10],
+#'                 function(x) infer.trio(x, is.CNA = TRUE, use.perm = TRUE,
+#'                                        nperms = 1000)$Inferred.Model)
 #' print(models)
 #' }
 #' @return a dataframe of dimension 1 x 18 with the following columns:
@@ -60,7 +62,7 @@
 #'   \item{pb22}{the p-value for the conditional test T2 ~ T1 | V,U}
 #'   \item{pV1:T1}{the p-value for the marginal test between V1 and T1}
 #'   \item{pV1:T2}{the p-value for the marginal test between V1 and T2}
-#'   \item{Minor.freq}{the calculated frequency of the minor allele of the genetic variant. Ignore when 
+#'   \item{Minor.freq}{the calculated frequency of the minor allele of the genetic variant. Ignore when
 #'  the genetic variant is CNA}
 #'   \item{coef11}{the coefficient estimate of beta_11}
 #'   \item{coef12}{the coefficient estimate of beta_12}
@@ -128,7 +130,7 @@ infer.trio=function(trio=NULL, use.perm = FALSE, gamma=0.05, is.CNA = FALSE, alp
   all.stats=c(append(xp, rp), append(pvals, cors), minor, pt.out$tvals)
 
   names(all.stats)=c("b11","b12", "b21","b22", "V1:T1", "V1:T2", "pb11",
-                     "pb12", "pb21","pb22","pV1:T1","pV1:T2", "Minor.freq", 
+                     "pb12", "pb21","pb22","pV1:T1","pV1:T2", "Minor.freq",
                      "coef11", "coef12", "coef21", "coef22")
   all.stats = as.data.frame(t(all.stats))
   all.stats$Inferred.Model = MRGN::class.vec(all.stats)

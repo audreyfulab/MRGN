@@ -250,6 +250,7 @@ gen.conf.coefs=function(n.effects, coef.range.list, neg.freq){
 #'
 #' @param Adj an n X n adjacency matrix
 #' @param return.igraph (logical) if TRUE the igraph object is returned. default == TRUE
+#' @param graph.layout a string specifying one of 'nicely' or 'as tree'. Determines the plotting structure of the graph
 #' @param node.size an integer giving the desired plotting size for graph vertices. Passed to igraph::plot_igraph
 #' @param arrow.size an integer giving the desired size for direct edges. Passed to igraph::plot_igraph
 #' @param node.color either a string giving the desired color or a vector of length n giving the colors for each
@@ -260,6 +261,8 @@ gen.conf.coefs=function(n.effects, coef.range.list, neg.freq){
 
 plot.graph.from.adj = function(Adj, return.igraph = TRUE, graph.layout = c('nicely','as tree'),
                                node.size = NULL, arrow.size = NULL, node.color = NULL, ...){
+  #resolve the layout argument to a single value
+  graph.layout = match.arg(graph.layout)
   #convert to igraph
   igraph.obj = igraph::graph_from_adjacency_matrix(Adj)
   #plot
@@ -283,7 +286,7 @@ plot.graph.from.adj = function(Adj, return.igraph = TRUE, graph.layout = c('nice
 
 #' A function to fill in an adjacency matrix with all connections between the confounding variable nodes
 #'
-#' @param A The empty adjacency matrix of the graph passed from gen.graph.skel()
+#' @param Adj The empty adjacency matrix of the graph passed from gen.graph.skel()
 #' @param b.snp either a single number or vector representing the effect(s) of the variant(s)
 #' @param b.med either a single number or vector representing the effect(s) between the molecular phenotypes
 #' @param struct either (1) the string "random" specifying a random DAG between the V and T nodes or (2) an adjacency matrix of dimension equal to the number of desired T and V nodes giving the connectivity between them
@@ -738,8 +741,8 @@ find.parents = function(Adjacency, location){
 #'                      conf.coef.ranges=list(K=c(0.01, 0.1), U=c(0.15,0.5),
 #'                                            W=c(0.15,0.5), Z=c(1, 1.5)))
 #' }
-#' # simulate from a model 1 graph with one 2 "known" and 8 "unknown" confounders using a set of passed confounders and
-#' # plot the graph.
+#' # simulate from a model 1 graph with 2 "known" and 8 "unknown" confounders
+#' # using a set of passed confounders and plot the graph.
 #' \dontrun{
 #' ## using a set of passed confounders (K and U)
 #' conf.mat = WBscores[,1:10]

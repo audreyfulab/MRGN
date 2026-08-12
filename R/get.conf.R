@@ -610,6 +610,7 @@ adjust.q=function(p, fdr, lambda, pi0.meth){
 #' @param fdr the false discovery rate
 #' @param lambda The value of the tuning parameter to estimate \eqn{pi_0}. Must be in \eqn{[0,1)}
 #' @param pi0.meth A string specifying one of 'smoother' or 'bootstrap'. Passed to qvalue::qvalue()
+#' @param num.of.trios the number of trios; sets the length of the returned qvalue and significance vectors
 #' @return an \eqn{n X 2} dataframe containing the qvalues, and significance (logical)
 #' @export adjust.q.reg
 
@@ -678,7 +679,7 @@ p.from.cor=function(r, n){
 #'
 #' @param data a matrix or dataframe of variables for which to select confounders
 #' @param confs a matrix or dataframe of covariates representing potential confounders
-#' @param conf.vars a matrix or dataframe of variables on which to condition each pairwise relationship
+#' @param cond.vars a matrix or dataframe of variables on which to condition each pairwise relationship
 #' @return a matrix of size ncol(confs) x ncol(data) of partial correlations
 #' @export compute.pairwise.pcors
 
@@ -814,8 +815,12 @@ p.from.reg2=function(pc, genes){
 #' @param pvalues a matrix of pvalues or a list of 2-list containing the pvalues and indicies for which pvalues to exlude
 #' (i.e from filtering)
 #' @param fdr.level the false discovery rate passed to adjust.q or adjust.q.reg
-#' @param lambda The value of the tuning parameter to estimate \eqn{pi_0}. Must be in \eqn{[0,1]} passed to adjust.q or adjust.q.reg
-#' @param pi0.meth A string specifying 'smoother' or 'bootstrap'. Passed to qvalue::qvalue()
+#' @param lambda.seq The value(s) of the tuning parameter to estimate \eqn{pi_0}. Must be in \eqn{[0,1]} passed to adjust.q or adjust.q.reg
+#' @param pi0.method A string specifying 'smoother' or 'bootstrap'. Passed to qvalue::qvalue()
+#' @param adjustment a string specifying one of 'individual' (apply the qvalue correction separately to each
+#' column of pvalues) or 'all' (apply the correction jointly to all pvalues)
+#' @param contains.na (logical) TRUE when pvalues contains NA values from filtered covariates, in which case
+#' adjust.q.reg is used in place of adjust.q. default = FALSE
 #' @return of input.type = list, then the output is a list of 2-lists containing the q values and sigificance. Else if the
 #' input.type == array, then the output is a 2-list where the first element is a matrix of qvalues and the second element is
 #' a matrix of significance determinations

@@ -1,6 +1,6 @@
 Package: MRGN
 Title: Medenlian Randomization Genomic Network
-Version: 1.3.8
+Version: 1.3.9
 Authors@R: 
     c(person("Jarred", "Kvamme", , "jarredk@uidaho.edu", role = c("aut", "cre"),
     comment = c(ORCID = "0000-0001-7333-2370")),
@@ -17,19 +17,20 @@ Depends:
     R (>= 4.0.0)
 Roxygen: list(markdown = TRUE)
 LazyData: true
+LazyDataCompression: xz
 RdMacros: Rdpack
-Imports: 
+Imports:
     prodlim,
     graph,
     igraph,
     pcalg,
-    psych,
     qvalue,
-    mvtnorm,
-    tmvtnorm,
-    ff,
     ppcor,
     propagate,
+    graphics,
     methods,
+    stats,
+    utils,
     Rdpack
 Config/roxygen2/version: 7.3.3.9000
+RoxygenNote: 7.3.2

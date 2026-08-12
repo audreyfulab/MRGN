@@ -19,9 +19,15 @@ get.q.sig(
 
 \item{fdr.level}{the false discovery rate passed to adjust.q or adjust.q.reg}
 
-\item{lambda}{The value of the tuning parameter to estimate \eqn{pi_0}. Must be in \eqn{[0,1]} passed to adjust.q or adjust.q.reg}
+\item{lambda.seq}{The value(s) of the tuning parameter to estimate \eqn{pi_0}. Must be in \eqn{[0,1]} passed to adjust.q or adjust.q.reg}
 
-\item{pi0.meth}{A string specifying 'smoother' or 'bootstrap'. Passed to qvalue::qvalue()}
+\item{pi0.method}{A string specifying 'smoother' or 'bootstrap'. Passed to qvalue::qvalue()}
+
+\item{adjustment}{a string specifying one of 'individual' (apply the qvalue correction separately to each
+column of pvalues) or 'all' (apply the correction jointly to all pvalues)}
+
+\item{contains.na}{(logical) TRUE when pvalues contains NA values from filtered covariates, in which case
+adjust.q.reg is used in place of adjust.q. default = FALSE}
 }
 \value{
 of input.type = list, then the output is a list of 2-lists containing the q values and sigificance. Else if the

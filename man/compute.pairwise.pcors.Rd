@@ -12,7 +12,7 @@ compute.pairwise.pcors(data, confs, cond.vars)
 
 \item{confs}{a matrix or dataframe of covariates representing potential confounders}
 
-\item{conf.vars}{a matrix or dataframe of variables on which to condition each pairwise relationship}
+\item{cond.vars}{a matrix or dataframe of variables on which to condition each pairwise relationship}
 }
 \value{
 a matrix of size ncol(confs) x ncol(data) of partial correlations
